@@ -1,6 +1,13 @@
 import { Component } from '@angular/core';
 
-const todos = [
+
+class Todo { 
+    constructor(public title:string,
+								public completed:boolean=false){}
+ }
+
+
+const todos:Todo[] = [
 	{
 		title: "Изучить Джс",
 		completed: true
@@ -26,13 +33,23 @@ const todos = [
   styleUrls: ['app.component.css'],
 })
 export class AppComponent  { 
-		title = "Users-list";
-		todos = todos;
+		title:string = "Users-list";
+		todos:Todo[] = todos;
+		newTodoTitle:string = "";
 
-		toggle(todo:any){
+
+    create(){
+
+			let todo = new Todo(this.newTodoTitle);
+			this.todos.push(todo);
+			this.newTodoTitle="";
+		}
+
+    
+		toggle(todo:Todo){
 			todo.completed = !todo.completed;
 		}
-		delete(todo:any){
+		delete(todo:Todo){
 			let index = this.todos.indexOf(todo);
 			if(index > -1){
 				this.todos.splice(index, 1);
