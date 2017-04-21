@@ -1,6 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {Todo} from '../shared/todo';
-
+import {TodoService} from '../shared/todo.service';
 
 
 @Component({
@@ -9,20 +9,24 @@ import {Todo} from '../shared/todo';
   templateUrl: `todo-list.component.html`,
   styleUrls: ['todo-list.component.css'],
 })
-export class TodoListComponent  { 
-    	@Input() todos:Todo[];
+export class TodoListComponent implements OnInit { 
+
+    	todos:Todo[];
 		newTodoTitle:string = "";
-
-
-		toggle(todo:Todo){
-			todo.completed = !todo.completed;
+		
+		constructor(public todoService: TodoService){
+			this.todos = [];
 		}
+		ngOnInit(){
+			this.todos = this.todoService.getTodos();
+		}
+ 
+		toggle(todo:Todo){
+			this.todoService.toggleTodo(todo);
+		}
+
 		delete(todo:Todo){
-			console.log('delete');
-			let index = this.todos.indexOf(todo);
-			if(index > -1){
-				this.todos.splice(index, 1);
-			}
+			this.todoService.deleteTodo(todo);
 		}
 
     
