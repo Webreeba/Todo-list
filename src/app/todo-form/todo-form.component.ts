@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
+import {Todo} from '../shared/todo';
+ import {todos} from '../shared/data';
 
 
 
@@ -10,14 +12,11 @@ import { Component } from '@angular/core';
 })
 export class TodoFormComponent  { 
 
-		newTodoTitle:string = "";
+		title:string = "";
+    @Output() add = new EventEmitter;
 
-
-    create(){
-
-			// let todo = new Todo(this.newTodoTitle);
-			// this.todos.push(todo);
-			// this.newTodoTitle="";
+    onSubmit(){
+			this.add.emit(this.title);
 		}
 
     

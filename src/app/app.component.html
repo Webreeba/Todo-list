@@ -2,7 +2,7 @@
   <h1>Hello {{title}}</h1>
 </header>
    <main>
-	<todo-form></todo-form>
-	<todo-list></todo-list>
+	<todo-form (add)="create($event)"></todo-form>
+	<todo-list [todos]="todos"></todo-list>
 
    </main>

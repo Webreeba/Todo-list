@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import {Todo} from '../shared/todo';
-import {todos} from '../shared/data';
+
 
 
 @Component({
@@ -10,7 +10,7 @@ import {todos} from '../shared/data';
   styleUrls: ['todo-list.component.css'],
 })
 export class TodoListComponent  { 
-    todos:Todo[] = todos;
+    	@Input() todos:Todo[];
 		newTodoTitle:string = "";
 
 
@@ -18,6 +18,7 @@ export class TodoListComponent  {
 			todo.completed = !todo.completed;
 		}
 		delete(todo:Todo){
+			console.log('delete');
 			let index = this.todos.indexOf(todo);
 			if(index > -1){
 				this.todos.splice(index, 1);
